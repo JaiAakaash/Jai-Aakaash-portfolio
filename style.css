@@ -1073,7 +1073,7 @@ body {
 }
 
 .education__achievements li::before {
-  content: '▸';
+  content: 'â–¸';
   color: var(--color-primary);
   position: absolute;
   left: 0;
@@ -1265,7 +1265,7 @@ body {
 }
 
 .project-card__research li::before {
-  content: '•';
+  content: 'â€¢';
   color: var(--color-primary);
   position: absolute;
   left: 0;
@@ -1760,4 +1760,40 @@ body {
   .project-card__content {
     padding: var(--space-20);
   }
+}
+
+/* Custom overrides */
+.hero__name,
+.hero__subtitle,
+.hero__description,
+.education__degree,
+.education__field,
+.education__institution,
+.section-title,
+.section-subtitle,
+p,
+h1, h2, h3, h4, h5, h6 {
+    color: white !important;
+}
+
+.contact__details,
+.contact__details p,
+.contact__details a {
+    color: white !important;
+}
+
+
+/* Make navigation links white */
+.nav__link {
+    color: white !important;
+}
+
+.nav__link:hover,
+.nav__link.active {
+    color: white !important;
+}
+
+/* Ensure mobile menu icon bars are white */
+.nav__toggle span {
+    background: white !important;
 }
