@@ -6,28 +6,37 @@ document.addEventListener('DOMContentLoaded', function() {
     const themeIcon = themeToggle.querySelector('.theme-toggle__icon');
     const body = document.body;
     
-    // Check for saved theme preference or default to 'light'
-    const savedTheme = 'light'; // Default to light mode
-    body.setAttribute('data-color-scheme', savedTheme);
-    updateThemeIcon(savedTheme);
-    
-    themeToggle.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        const currentTheme = body.getAttribute('data-color-scheme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        
-        body.setAttribute('data-color-scheme', newTheme);
-        updateThemeIcon(newTheme);
-        updateHeaderBackground();
-        
-        // Force a repaint by adding a temporary class
-        body.style.transition = 'all 0.3s ease';
-        setTimeout(() => {
-            body.style.transition = '';
-        }, 300);
+    // BROWSER THEME DETECTION - NEW CODE
+function detectSystemTheme() {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+    }
+    return 'light';
+}
+
+// Get system theme and apply it
+const systemTheme = detectSystemTheme();
+const savedTheme = localStorage.getItem('portfolio-theme') || systemTheme;
+
+console.log('🎨 System theme detected:', systemTheme);
+console.log('✅ Using theme:', savedTheme);
+
+body.setAttribute('data-color-scheme', savedTheme);
+updateThemeIcon(savedTheme);
+
+// Listen for system theme changes
+if (window.matchMedia) {
+    const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    darkModeQuery.addEventListener('change', function(e) {
+        if (!localStorage.getItem('portfolio-theme')) {
+            const newTheme = e.matches ? 'dark' : 'light';
+            console.log('🔄 System theme changed to:', newTheme);
+            body.setAttribute('data-color-scheme', newTheme);
+            updateThemeIcon(newTheme);
+        }
     });
+}
+
     
     function updateThemeIcon(theme) {
         themeIcon.textContent = theme === 'light' ? '🌙' : '☀️';
