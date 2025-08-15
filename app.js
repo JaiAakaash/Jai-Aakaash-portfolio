@@ -604,4 +604,40 @@ window.addEventListener('load', fixContactButtons);
     });
     
     console.log('AI/ML Academic Portfolio loaded successfully! 🎓🤖');
+    // AUTOMATICALLY REMOVE GOOGLE SCHOLAR AND RESEARCHGATE BUTTONS
+function removeUnwantedButtons() {
+    console.log('🗑️ Removing Google Scholar and ResearchGate buttons...');
+    
+    setTimeout(() => {
+        const allLinks = document.querySelectorAll('.academic-link, a');
+        let removedCount = 0;
+        
+        allLinks.forEach(link => {
+            const linkText = link.textContent.toLowerCase().trim();
+            
+            // Remove Google Scholar button
+            if (linkText.includes('scholar') || linkText.includes('🎓')) {
+                console.log('🗑️ Removing Google Scholar button');
+                link.style.display = 'none';
+                removedCount++;
+            }
+            
+            // Remove ResearchGate button
+            else if (linkText.includes('researchgate') || linkText.includes('research') || linkText.includes('🔬')) {
+                console.log('🗑️ Removing ResearchGate button');
+                link.style.display = 'none';
+                removedCount++;
+            }
+        });
+        
+        console.log(`✅ Removed ${removedCount} unwanted buttons`);
+    }, 500);
+}
+
+// Run the removal function
+removeUnwantedButtons();
+
+// Also run on window load as backup
+window.addEventListener('load', removeUnwantedButtons);
+
 });
