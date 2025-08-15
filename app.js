@@ -495,7 +495,7 @@ if (window.matchMedia) {
             if (this.href === 'https://researchgate.net' || 
                 this.href === 'https://scholar.google.com' || 
                 this.href === 'https://www.linkedin.com/in/jai-aakaash-119834274/' || 
-                this.href === 'https://github.com/JaiAakaash/Jai-Aakaash-portfolio.git') {
+                this.href === 'https://github.com/JaiAakaash') {
                 e.preventDefault();
                 showNotification('Academic profile links will be updated with actual URLs.', 'info');
             }
