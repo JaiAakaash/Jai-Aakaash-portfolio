@@ -488,19 +488,68 @@ if (window.matchMedia) {
         updateThemeIcon(currentTheme);
     }, 100);
 
-    // Handle external links
-    const externalLinks = document.querySelectorAll('a[target="_blank"]');
-    externalLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            if (this.href === 'https://researchgate.net' || 
-                this.href === 'https://scholar.google.com' || 
-                this.href === 'https://www.linkedin.com/in/jai-aakaash-119834274/' || 
-                this.href === 'https://github.com/JaiAakaash') {
-                e.preventDefault();
-                showNotification('Academic profile links will be updated with actual URLs.', 'info');
+ // WORKING CONTACT BUTTONS - NEW CODE
+function fixContactButtons() {
+    console.log('🔧 Fixing contact buttons...');
+    
+    setTimeout(() => {
+        const allLinks = document.querySelectorAll('.academic-link, a');
+        let fixedCount = 0;
+        
+        allLinks.forEach(link => {
+            const linkText = link.textContent.toLowerCase().trim();
+            
+            // Gmail Button
+            if (linkText.includes('gmail') || linkText.includes('📧')) {
+                console.log('📧 Fixing Gmail button...');
+                link.href = 'mailto:jaiaakaash06@gmail.com?subject=Research%20Collaboration%20Inquiry&body=Dear%20Jai%20Aakaash%2C%0A%0AI%20am%20interested%20in%20discussing%20research%20opportunities...';
+                link.onclick = function() {
+                    console.log('✅ Gmail clicked!');
+                    showNotification('Opening email client...', 'success');
+                    return true;
+                };
+                fixedCount++;
+            }
+            
+            // GitHub Button  
+            else if (linkText.includes('github') || linkText.includes('🐙')) {
+                console.log('🐙 Fixing GitHub button...');
+                link.href = 'https://github.com/JaiAakaash';
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.onclick = function() {
+                    console.log('✅ GitHub clicked! Opening:', this.href);
+                    showNotification('Opening GitHub profile...', 'success');
+                    return true;
+                };
+                fixedCount++;
+            }
+            
+            // LinkedIn Button
+            else if (linkText.includes('linkedin') || linkText.includes('💼')) {
+                console.log('💼 Fixing LinkedIn button...');
+                link.href = 'https://www.linkedin.com/in/jai-aakaash-119834274/';
+                link.target = '_blank'; 
+                link.rel = 'noopener noreferrer';
+                link.onclick = function() {
+                    console.log('✅ LinkedIn clicked! Opening:', this.href);
+                    showNotification('Opening LinkedIn profile...', 'success');
+                    return true;
+                };
+                fixedCount++;
             }
         });
-    });
+        
+        console.log(`✅ Contact buttons fixed! (${fixedCount} buttons updated)`);
+    }, 1000);
+}
+
+// Call the fix function
+fixContactButtons();
+
+// Backup fix on window load
+window.addEventListener('load', fixContactButtons);
+
 
     // Handle info notifications
     function showInfoNotification(message) {
