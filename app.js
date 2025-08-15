@@ -494,8 +494,8 @@ if (window.matchMedia) {
         link.addEventListener('click', function(e) {
             if (this.href === 'https://researchgate.net' || 
                 this.href === 'https://scholar.google.com' || 
-                this.href === 'https://linkedin.com' || 
-                this.href === 'https://github.com') {
+                this.href === 'https://www.linkedin.com/in/jai-aakaash-119834274/' || 
+                this.href === 'https://github.com/JaiAakaash/Jai-Aakaash-portfolio.git') {
                 e.preventDefault();
                 showNotification('Academic profile links will be updated with actual URLs.', 'info');
             }
